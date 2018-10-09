@@ -7,7 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -24,9 +26,10 @@ public class Application {
     }
 
     @RequestMapping("/")
-    public String greetings(){
+    public String greetings(@RequestParam(required = false) String name){
         Greetings greetingService = (Greetings)context.getBean("greetingService");
-        String result = greetingService.say("Dubbo Docker");
+        System.out.println("Request param is " + name);
+        String result = greetingService.say(name);
         return result;
     }
 }

@@ -1,0 +1,22 @@
+version: "2"
+services:
+  zookeeper:
+    image: 'zookeeper:3.4'
+    hostname: zookeeper
+  producer:
+    image: 'binblee/producer:0.1'
+    build: 
+      dockerfile: Dockerfile
+      context: ./service-producer/
+    environment:
+      - ZOOKEEPER_SERVER=zookeeper
+  consumer:
+    image: 'binblee/consumer:0.1'
+    build: 
+      dockerfile: Dockerfile
+      context: ./service-consumer/
+    environment:
+      - ZOOKEEPER_SERVER=zookeeper
+      - SERVER_PORT=8899
+    ports:
+      - 8899:8899

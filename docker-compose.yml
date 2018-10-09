@@ -3,6 +3,14 @@ services:
   zookeeper:
     image: 'zookeeper:3.4'
     hostname: zookeeper
+  admin:
+    image: 'chenchuxin/dubbo-admin:latest'
+    environment: 
+      - dubbo.registry.address=zookeeper://zookeeper:2181
+      - dubbo.admin.root.password=root
+      - dubbo.admin.guest.password=root
+    ports: 
+      - "8080:8080"
   producer:
     image: 'binblee/producer:0.1'
     build: 

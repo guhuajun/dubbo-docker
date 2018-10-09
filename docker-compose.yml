@@ -26,5 +26,6 @@ services:
     environment:
       - ZOOKEEPER_SERVER=zookeeper
       - SERVER_PORT=8899
+      - DUBBO_IP_TO_REGISTRY=10.8.0.34
     ports:
       - 8899:8899
